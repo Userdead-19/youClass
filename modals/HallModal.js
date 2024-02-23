@@ -17,7 +17,7 @@ const hallSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  shedule: [
+  schedule: [
     {
       day: {
         type: String,
@@ -27,11 +27,14 @@ const hallSchema = new mongoose.Schema({
         type: Array,
         required: true,
       },
+      bookingBy: {
+        type: Array,
+      },
     },
   ],
 });
 
-module.exports = mongoose.model("Hall", hallSchema);
+module.exports = mongoose.model("hallSchema", hallSchema);
 
 /*
  hallId:"y402",

@@ -1,6 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const UserRouter = require("./routes/UserRoutes");
+const HallRouter = require("./routes/HallRoutes");
+const TimetableRouter = require("./routes/Timetable");
 
 const app = express();
 
@@ -16,6 +19,10 @@ mongoose
 
 app.use(morgan("dev"));
 app.use(express.json());
+
+app.use("/user", UserRouter);
+app.use("/hall", HallRouter);
+app.use("/timetable", TimetableRouter);
 
 app.get("/", (req, res) => {
   res.json({ message: "This is backend SDK of youClass " });
