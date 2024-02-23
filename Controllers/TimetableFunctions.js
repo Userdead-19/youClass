@@ -20,7 +20,7 @@ const CreateTimetable = async (req, res) => {
 const getTimetable = async (req, res) => {
   const { id } = req.params;
   try {
-    console.log("Requested ClassName:", id); // Add this line for debugging
+    console.log("Requested ClassName:", id);
     TimetableModal.findOne({ className: id })
       .then((timetable) => {
         if (timetable) {
@@ -30,43 +30,41 @@ const getTimetable = async (req, res) => {
         }
       })
       .catch((err) => {
-        console.error("MongoDB Error:", err); // Add this line for debugging
+        console.error("MongoDB Error:", err);
         res.status(500).json({ message: "Server Error" });
       });
   } catch (err) {
-    console.error("Internal Server Error:", err); // Add this line for debugging
+    console.error("Internal Server Error:", err);
     res.status(500).json({ message: "Server Error" });
   }
 };
+
 const UpdateTimetable = async (req, res) => {
   const { id } = req.params;
-  const { day, Halls } = req.body.timetable;
-
   try {
-    // Find the timetable document for the specified class
-    const timetable = await TimetableModal.findOne({ className: id });
+    // Update timetable
+    const timetable = await TimetableModal.findOneAndUpdate(
+      { className: id },
+      { $set: { TimeTable: req.body.timeTable } },
+      { new: true } // Return updated document
+    );
 
     if (!timetable) {
-      return res.status(404).json({ message: "Timetable not found for class" });
+      return res.status(404).json({ message: "Timetable not found" });
     }
 
-    // Find the index of the day within the TimeTable array
-    const dayIndex = timetable.TimeTable.findIndex((item) => item.day === day);
+    // Update hall schedule
+    const hall = await HallModal.findOneAndUpdate(
+      { hallId: req.body.hallId },
+      { $set: { schedule: req.body.schedule } },
+      { new: true } // Return updated document
+    );
 
-    if (dayIndex === -1) {
-      return res.status(404).json({ message: "Day not found in timetable" });
+    if (!hall) {
+      return res.status(404).json({ message: "Hall not found" });
     }
 
-    console.log("Day index:", dayIndex);
-    // Update the Halls array for the specified day
-    timetable.TimeTable[dayIndex].Halls = Halls;
-
-    // Save the updated timetable document
-    const updatedTimetable = await timetable.save();
-
-    res
-      .status(200)
-      .json({ message: "Timetable updated", timetable: updatedTimetable });
+    res.status(200).json({ message: "Timetable Updated", timetable });
   } catch (error) {
     console.error("Error updating timetable:", error);
     res.status(500).json({ message: "Server Error" });
