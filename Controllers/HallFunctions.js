@@ -40,7 +40,10 @@ const UpdateHall = async (req, res) => {
   const { id } = req.params;
   try {
     hallSchema
-      .findOneAndUpdate({ hallId: id }, req.body)
+      .findOneAndUpdate(
+        { hallId: id },
+        { $set: { schedule: req.body.schedule } }
+      )
       .then((result) => {
         if (result) {
           res.status(200).json({ message: "Hall Updated", result });

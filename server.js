@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-const UserRouter = require("./routes/UserRoutes");
-const HallRouter = require("./routes/HallRoutes");
-const TimetableRouter = require("./routes/Timetable");
+const UserRouter = require("./Routes/UserRoutes");
+const HallRouter = require("./Routes/HallRoutes");
+const TimetableRouter = require("./Routes/Timetable");
 
 const app = express();
 
