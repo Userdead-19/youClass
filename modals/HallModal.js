@@ -8,6 +8,7 @@ const hallSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
+    default: "active",
   },
   block: {
     type: String,
@@ -26,9 +27,6 @@ const hallSchema = new mongoose.Schema({
       sessions: {
         type: Array,
         required: true,
-      },
-      bookingBy: {
-        type: Array,
       },
     },
   ],

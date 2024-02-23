@@ -49,8 +49,9 @@ const getStudentTimeTable = async (req, res) => {
       .then((user) => {
         if (user) {
           if (user.StudentTimeTableId) {
+            console.log(user);
             timetableSchema
-              .findOne({ ClassName: user.StudentTimeTableId })
+              .findOne({ className: user.StudentTimeTableId })
               .then((timetable) => {
                 if (timetable) {
                   res
