@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const UserRouter = require("./Routes/UserRoutes");
 const HallRouter = require("./Routes/HallRoutes");
-const TimetableRouter = require("./Routes/Timetable");
+const TimetableRouter = require("./Routes/TimeTable");
 
 const app = express();
 
