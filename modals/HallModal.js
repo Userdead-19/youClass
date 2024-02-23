@@ -1,6 +1,35 @@
 const mongoose = require("mongoose");
 
-const hallSchema = new mongoose.Schema({});
+const hallSchema = new mongoose.Schema({
+  hallId: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    required: true,
+  },
+  block: {
+    type: String,
+    required: true,
+  },
+  floor: {
+    type: Number,
+    required: true,
+  },
+  shedule: [
+    {
+      day: {
+        type: String,
+        required: true,
+      },
+      sessions: {
+        type: Array,
+        required: true,
+      },
+    },
+  ],
+});
 
 module.exports = mongoose.model("Hall", hallSchema);
 
