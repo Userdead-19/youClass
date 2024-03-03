@@ -10,7 +10,7 @@
     "passport": "^0.7.0"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "name": "kriya_backend",
   "description": "",
