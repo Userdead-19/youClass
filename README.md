@@ -1,1 +1,3 @@
-# this is a backend for an created for booking the classrooms in a college or university both for students and teachers
+## YouClass
+
+this is a project done for the Nextech hackathon of kriya 2024 . Basically this project is used to access the Campus resources and services
